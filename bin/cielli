@@ -1,0 +1,35 @@
+#! /usr/bin/env ruby
+#  encoding: utf-8
+
+require_relative '../lib/cielli.rb'
+
+cielli do
+  run do
+    puts CLI
+  end
+
+  CLI = <<~________
+    #! /usr/bin/env ruby
+    #  encoding: utf-8
+
+    require 'cielli'
+
+    cielli do
+      help <<~____
+        #{ Cielli.utils.indent(Cielli::DEFAULT_HELP, 4).strip }
+      ____
+
+      run do
+        p [@argv, @options]
+      end
+
+      run(:foo) do
+        p [@mode, @argv, @options]
+      end
+
+      run(:bar) do
+        p [@mode, @argv, @options]
+      end
+    end
+  ________
+end
