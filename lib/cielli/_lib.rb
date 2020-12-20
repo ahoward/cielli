@@ -1,5 +1,5 @@
 class Cielli
-  Version = '4.2.0' unless defined?(Version)
+  Version = '4.2.2' unless defined?(Version)
 
   class << self
     def version

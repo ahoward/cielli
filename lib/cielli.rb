@@ -65,6 +65,7 @@
 
     def parse_command_line!
       @options = Hash.new
+      @opts = Hash.new
 
       argv = []
       head = []
@@ -98,6 +99,12 @@
       argv += tail
 
       @argv.replace(argv)
+
+      @options.each do |key, val|
+        @opts[key.to_s.to_sym] = val
+      end
+      
+      [@options, @opts]
     end
 
     def set_mode!
