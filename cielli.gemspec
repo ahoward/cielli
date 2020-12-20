@@ -3,7 +3,7 @@
 
 Gem::Specification::new do |spec|
   spec.name = "cielli"
-  spec.version = "0.4.2"
+  spec.version = "4.2.4"
   spec.platform = Gem::Platform::RUBY
   spec.summary = "cielli"
   spec.description = "description: cielli kicks the ass"

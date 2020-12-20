@@ -33,10 +33,12 @@
     attr_accessor :help
 
     def run!(env = ENV, argv = ARGV)
+      before!
       init!(env, argv)
       parse_command_line!
       set_mode!
       run_mode!
+      after!
     end
 
     def init!(env, argv)
@@ -47,6 +49,26 @@
       @stdin = $stdin.dup
       @stderr = $stderr.dup
       @help = @klass.help || utils.unindent(EXAMPLE_HELP)
+    end
+
+    def self.before(&block)
+      @before ||= []
+      @before << block if block
+      @before
+    end 
+
+    def before
+      self.class.before.each{|block| block.call}
+    end
+
+    def self.after(&block)
+      @after ||= []
+      @after << block if block
+      @after
+    end
+    
+    def after
+      self.class.after.each{|block| block.call}
     end
 
     EXAMPLE_HELP = <<-__
